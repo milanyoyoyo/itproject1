@@ -4,13 +4,13 @@ session_start();
 {
 header('Location:loginssession2.html');
 }
-if (empty($_SESSION["declare"]))
+if (isset($_SESSION["declare"]))
 {
-header('Location:result1.html');
+header('Location:result1.php');
 }
 
 $username=$_SESSION['name'];
-echo $username;
+
 $db_host="localhost";
 $db_user="root";
 $db_password="tiger";
@@ -19,13 +19,13 @@ $dbh = mysqli_connect($db_host,$db_user,$db_password,$db_name) or die (" could n
 
 
 $vote=$_POST['candidate'];
-echo $vote;
+
 $quer="select votecount from candidate where name='$vote'";
 $resul=mysqli_query($dbh,$quer) or die ("error querying the database1");
 $ro=mysqli_fetch_assoc($resul);
 $c=$ro['votecount'];
 $c=$c+1;
-echo $c;
+
 $q="update candidate set votecount=$c where name='$vote'";
 $r=mysqli_query($dbh,$q) or die ("error querying the database2");
 $qq="update login set voted='yes' where id='$username'";
