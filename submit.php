@@ -31,4 +31,8 @@ $r=mysqli_query($dbh,$q) or die ("error querying the database2");
 $qq="update login set voted='yes' where id='$username'";
 $rq=mysqli_query($dbh,$qq) or die ("error querying the database3");
 echo 'your vote is recorded  ';
+
 ?>
+<form action="logout.php" method="POST">
+<input type="submit" value="logout">
+</form>

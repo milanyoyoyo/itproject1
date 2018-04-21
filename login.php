@@ -17,20 +17,31 @@ $username=$_POST['username'];
 	$row=mysqli_fetch_array($result);
 	$_SESSION['section']=$row['section'];
 
-	if($password==$row['password']&&$row['type']==1)
-	{
+	if($password==$row['password'])
+{
+		if($row['type']==1)
+		{
 		$_SESSION['name']=$username;
 		header('location:admin.php');
-	}
-	elseif($password==$row['password']&&$row['voted']=="no"){
+		}
+	else {
+		if($row['voted']=="no")
+		{
+
 		$_SESSION['name']=$username;
 		header('location:Election.php');
-	}
-	elseif($password==$row['password']&&$row['voted']=="yes")
+		}
+		else
+		{
+		$_SESSION['name']=$username;
 		header('location:voted.php');
+		}		
+	}
+
+}
 	else
 		header('location:loginssession.html');
-		
+
 ?>
 
 

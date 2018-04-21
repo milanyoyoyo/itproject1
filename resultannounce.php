@@ -1,30 +1,24 @@
-
-
 <html>
 	<head>
 		<?php
 	session_start();
-	if(!isset($_SESSION['name']))
-	{
-	header('location:loginssession.html');
-	}
 	$db_host="localhost";
 	$db_user="root";
 	$db_pass="tiger";
 	$db_name="milan";
 	
 	$dbh=mysqli_connect($db_host,$db_user,$db_pass,$db_name) or die("Error connecting to Databsase");
-	$z="select * from vote;";
-	$r=mysqli_query($dbh,$z);
-	$row=mysqli_fetch_array($r);
-	if($row['vote']==0){
-	header('location:approve.php');
-	}
+	
+
+	$dbh=mysqli_connect($db_host,$db_user,$db_pass,$db_name) or die("Error connecting to Databsase");
+	
 	$query="select count(id) from candidate;";
 	$query2="select * from candidate where section=2 order by votecount desc;";
 	$result2=mysqli_query($dbh,$query2);	
 	$query3="select * from candidate where section=3 order by votecount desc;";
 	$result3=mysqli_query($dbh,$query3);	
+?>
+		
 ?>
 	<style>
 		.table{
@@ -41,7 +35,7 @@
 	<body>
 	
 
-		<center><h2>Welcome, Admin</h2></center>
+		<center><h2>Welcome, </h2></center>
 <div class="tab">
 
 
@@ -78,16 +72,14 @@
 		
 </div>
 <center>
-<form action="result.php">
-  
-  <input type="submit" value="declare result">
-</form> 
-<form action="unset.php">
-  
-  <input type="submit" value="unset all">
-</form> 
+ <?php
+	$sec=$_SESSION['section'];
+	$query2="select name from candidate where section=$sec order by votecount desc;";
+	$result2=mysqli_query($dbh,$query2);
+	echo "the winner is ".$result2['name'];
+	
+?>
 </center>
 
 	</body>
 </html>		
-

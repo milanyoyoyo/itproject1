@@ -18,4 +18,5 @@ $query="insert into candidate values ('$id','$username','$section','0','$cgpa','
 	$result=mysqli_query($dbh,$query) or die("Nope");
 	
 echo "register complete";
+?>
 
