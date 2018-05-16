@@ -1,51 +1,25 @@
-<?php
-session_start();
+<html>
+    <body>
+        
+<form method="post" action="logindb.php">
+    <center>
+<table>
+    <tr>
+        <td>
+            <label for="username"> Username:</label></td>
+        <td>
+            <input type="text" id="username" name="username" required /> <br/></td>
+    </tr>
+    <tr>
+        <td>
+            
 
-$db_host="localhost";
-$db_user="root";
-$db_password="tiger";
-$db_name="milan";
-$dbh = mysqli_connect($db_host,$db_user,$db_password,$db_name) or die (" could not connect to database".mysqli_error($dbh));
-
-
-
-
-$username=$_POST['username'];
-	$password=$_POST['password'];
-	$query="select * from login where id='$username';";
-	$result=mysqli_query($dbh,$query) or die("Nope");
-	$row=mysqli_fetch_array($result);
-	$_SESSION['section']=$row['section'];
-
-	if($password==$row['password'])
-{
-		if($row['type']==1)
-		{
-		$_SESSION['name']=$username;
-		header('location:admin.php');
-		}
-	else {
-		if($row['voted']=="no")
-		{
-
-		$_SESSION['name']=$username;
-		header('location:Election.php');
-		}
-		else
-		{
-		$_SESSION['name']=$username;
-		header('location:voted.php');
-		}		
-	}
-
-}
-	else
-		header('location:loginssession.html');
-
-?>
-
-
-
-
-
-
+            <label for="password"> Password:</label></td>
+        <td><input type="password" id="password" name="password" required/> <br/></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Submit Form" name="submit"/></td></tr></table></center>
+</form>
+    </body>
+</html>
